@@ -7,6 +7,7 @@ import inout.WriteFile;
 import model.Contact;
 import model.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -41,8 +42,9 @@ public class PhoneBookManager extends Phone implements Iphone {
 
     @Override
     public void sort() {
-
-
+        ReadFile readfile = new ReadFile();
+        List<Contact> contactList= readfile.readContact();
+        contactList.sort(new Contact());
     }
 
     @Override
