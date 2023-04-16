@@ -1,6 +1,9 @@
 package model;
 
-public class Contact {
+import java.io.Serializable;
+import java.util.Comparator;
+
+public class Contact implements Serializable , Comparator<Contact> {
 private String name;
 private String phonenumber;
 private Type type;
@@ -46,4 +49,8 @@ private Type type;
                 ", type=" + type +
                 '}';
     }
+  @Override
+   public int compare(Contact contact1, Contact contact2){
+        return contact1.getName().compareToIgnoreCase(contact2.getName());
+   }
 }

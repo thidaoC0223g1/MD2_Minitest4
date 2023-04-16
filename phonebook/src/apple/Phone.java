@@ -10,5 +10,5 @@ public abstract class Phone {
 
     public abstract void removePhone(String name);
 
-    public abstract void updatePhone(String phone, String newphone);
+    public abstract void updatePhone(String name, String newphone);
 }

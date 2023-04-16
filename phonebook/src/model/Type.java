@@ -1,6 +1,8 @@
 package model;
 
-public class Type {
+import java.io.Serializable;
+
+public class Type implements Serializable {
  private int id;
  private String companyname;
  private String address;

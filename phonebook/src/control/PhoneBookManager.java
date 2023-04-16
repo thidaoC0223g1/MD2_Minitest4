@@ -6,10 +6,8 @@ import inout.ReadFile;
 import inout.WriteFile;
 import model.Contact;
 import model.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class PhoneBookManager extends Phone implements Iphone {
     private List<Contact> contactList = new ArrayList<>();
@@ -33,10 +31,15 @@ public class PhoneBookManager extends Phone implements Iphone {
     public void searchPhone(String name) {
         ReadFile readfile = new ReadFile();
         List<Contact> contactList= readfile.readContact();
+        boolean check =false;
         for(Contact contact:contactList){
             if(name.equals(contact.getName())){
-                System.out.println(contact);
-            }else System.out.println("ten nhap vao khong ton tai");
+                System.out.println("danh ba can tim la "+ contact.getName()+" "+ contact.getPhonenumber());
+                check=true;
+                break;
+            }
+        }if(!check){
+            System.out.println("ten can tim chua co trong danh ba");
         }
     }
 
@@ -45,21 +48,31 @@ public class PhoneBookManager extends Phone implements Iphone {
         ReadFile readfile = new ReadFile();
         List<Contact> contactList= readfile.readContact();
         contactList.sort(new Contact());
+        WriteFile writeFile = new WriteFile();
+        writeFile.writeContact(contactList);
     }
 
     @Override
     public void display(Type type) {
-
+        ReadFile readfile = new ReadFile();
+        List<Contact> contactList= readfile.readContact();
+        for(Contact contact :contactList){
+            if(type ==null){
+                System.out.println(contact);
+            }else if (type.getId()==contact.getType().getId()&&type.getCompanyname().equals(contact.getType().getCompanyname())
+            && type.getAddress().equals(contact.getType().getAddress())){
+                System.out.println("danh ba can tim la "+ contact.getName()+" "+ contact.getPhonenumber());
+            }
+        }
     }
 
     @Override
     public void insertPhone(Contact contact) {
         ReadFile readfile = new ReadFile();
         List<Contact> contactList= readfile.readContact();
-        WriteFile writeFile = new WriteFile();
         contactList.add(contact);
+        WriteFile writeFile = new WriteFile();
         writeFile.writeContact(contactList);
-
     }
 
     @Override
@@ -69,7 +82,6 @@ public class PhoneBookManager extends Phone implements Iphone {
         contactList.removeIf(contact -> name.equals(contact.getName()));
         WriteFile writeFile = new WriteFile();
         writeFile.writeContact(contactList);
-
     }
 
     @Override
@@ -92,7 +104,7 @@ public class PhoneBookManager extends Phone implements Iphone {
         String name = input.nextLine();
         System.out.println("Nhap vao so dien thoai");
         String phonenumber = input.nextLine();
-        Type type = new Type(0, " ", " ");
+        Type type = new Type(0, "", "");
         System.out.println("An phim 1 de chon kieu tuy chon \n" +
                 "An phim bat ki de chon kieu mac dinh");
         String choice = input.nextLine();
