@@ -32,7 +32,11 @@ public class PhoneBookManager extends Phone implements Iphone {
     public void searchPhone(String name) {
         ReadFile readfile = new ReadFile();
         List<Contact> contactList= readfile.readContact();
-        contactList.stream().filter(contact -> name.equals(contact.getName())).forEach(System.out::println);
+        for(Contact contact:contactList){
+            if(name.equals(contact.getName())){
+                System.out.println(contact);
+            }else System.out.println("ten nhap vao khong ton tai");
+        }
     }
 
     @Override
@@ -67,8 +71,16 @@ public class PhoneBookManager extends Phone implements Iphone {
     }
 
     @Override
-    public void updatePhone(String phone, String newphone) {
-
+    public void updatePhone(String name, String newphone) {
+        ReadFile readfile = new ReadFile();
+        List<Contact> contactList= readfile.readContact();
+      for(Contact contact:contactList){
+          if(name.equals(contact.getName())){
+              contact.setPhonenumber(newphone);
+          }
+      }
+        WriteFile writeFile = new WriteFile();
+        writeFile.writeContact(contactList);
     }
 
 
