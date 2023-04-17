@@ -5,8 +5,8 @@ import model.Contact;
 import java.io.*;
 import java.util.List;
 
-public class WriteFile {
-    public void writeContact(List<Contact> contactList) {
+public class WriteFile<T> {
+    public void writeContact(List<T> contactList) {
         File file = new File("./phonebook/txt/phonebook.dat");
         try {
             FileOutputStream fileoutput = new FileOutputStream(file);
