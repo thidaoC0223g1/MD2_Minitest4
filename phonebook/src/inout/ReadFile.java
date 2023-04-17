@@ -14,6 +14,8 @@ public class ReadFile {
             FileInputStream fileinput = new FileInputStream(file);
             ObjectInputStream listinput = new ObjectInputStream(fileinput);
              contactlist = (List<Contact>) listinput.readObject();
+             listinput.close();
+             fileinput.close();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         } catch (FileNotFoundException e) {

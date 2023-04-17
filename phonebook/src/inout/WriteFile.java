@@ -13,6 +13,8 @@ public class WriteFile {
             try {
                 ObjectOutputStream listouput = new ObjectOutputStream(fileoutput);
                 listouput.writeObject(contactList);
+                listouput.close();
+                fileoutput.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
